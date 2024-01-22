@@ -1,22 +1,18 @@
-import { UserModule } from "./user/user.module";
+import { AddressModule } from "./modules/address/address.module";
+import { StateModule } from "./modules/state/state.module";
+import { CityModule } from "./modules/city/city.module";
+import { UserModule } from "./modules/user/user.module";
+import typeOrmConfig from "./config/typeorm.config";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { ConfigModule } from "@nestjs/config";
 import { Module } from "@nestjs/common";
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      envFilePath: ["env/local.env"],
-    }),
     UserModule,
-    TypeOrmModule.forRoot({
-      type: "postgres",
-      database: process.env.DB_DATABASE,
-      host: process.env.DB_HOST,
-      password: process.env.DB_PASSWORD,
-      port: Number(process.env.DB_PORT),
-      username: process.env.DB_USERNAME,
-    }),
+    TypeOrmModule.forRoot(typeOrmConfig),
+    StateModule,
+    CityModule,
+    AddressModule,
   ],
   controllers: [],
   providers: [],
