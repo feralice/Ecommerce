@@ -6,13 +6,13 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 
-@Entity({ name: "user" })
+@Entity({ name: "city" })
 export class CityEntity {
   @PrimaryGeneratedColumn("rowid")
   id: number;
 
   @Column({ name: "state_id", nullable: false })
-  state_id: number;
+  stateId: number;
 
   @Column({ name: "name", nullable: false })
   name: string;
