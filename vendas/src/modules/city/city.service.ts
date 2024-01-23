@@ -1,4 +1,4 @@
-import { CacheService } from "src/config/cache/cache.service";
+import { CacheService } from "@/config/cache/cache.service";
 import { InjectRepository } from "@nestjs/typeorm";
 import { CityEntity } from "./entity/city.entity";
 import { Injectable } from "@nestjs/common";
