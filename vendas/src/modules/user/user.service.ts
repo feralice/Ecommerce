@@ -1,7 +1,7 @@
-import { CreateUserDto } from "./dto/createUser.dto";
+import { CreateUserDto } from "@/modules/user/dto/request/create-user.dto";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { UserEntity } from "./entity/user.entity";
-import { Injectable } from "@nestjs/common";
 import { Repository } from "typeorm";
 import { hash } from "bcrypt";
 
@@ -25,5 +25,19 @@ export class UserService {
 
   async getAllUsers(): Promise<UserEntity[]> {
     return this.userRepository.find();
+  }
+
+  async findUserById(userId: number): Promise<UserEntity> {
+    const user = await this.userRepository.findOne({
+      where: {
+        id: userId,
+      },
+    });
+
+    if (!user) {
+      throw new NotFoundException(`User with userId: ${userId} not found!`);
+    }
+
+    return user;
   }
 }
