@@ -42,5 +42,5 @@ export class AddressEntity {
 
   @ManyToOne(() => CityEntity, (city) => city.addresses)
   @JoinColumn({ name: "city_id", referencedColumnName: "id" })
-  city?: AddressEntity;
+  city?: CityEntity;
 }
