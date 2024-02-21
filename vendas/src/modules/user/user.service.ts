@@ -1,5 +1,9 @@
+import {
+  Injectable,
+  NotFoundException,
+  UnprocessableEntityException,
+} from "@nestjs/common";
 import { CreateUserDto } from "@/modules/user/dto/request/create-user.dto";
-import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { UserEntity } from "./entity/user.entity";
 import { Repository } from "typeorm";
@@ -15,6 +19,16 @@ export class UserService {
   async createUser(createUserDto: CreateUserDto): Promise<UserEntity> {
     const saltOrRounds = 10;
     const passwordHashed = await hash(createUserDto.password, saltOrRounds);
+
+    const user = await this.findUserByEmail(createUserDto.email).catch(
+      () => undefined,
+    );
+
+    if (user) {
+      throw new UnprocessableEntityException(
+        `User with email: ${createUserDto.email} already exists!`,
+      );
+    }
 
     return this.userRepository.save({
       ...createUserDto,
