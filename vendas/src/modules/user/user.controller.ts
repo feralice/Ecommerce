@@ -8,7 +8,7 @@ import {
   ValidationPipe,
 } from "@nestjs/common";
 import { CreateUserDto } from "@/modules/user/dto/request/create-user.dto";
-import { UserDtoResponse } from "./dto/response/user-response.dto";
+import { UserResponseDto } from "./dto/response/user-response.dto";
 import { UserService } from "./user.service";
 
 @Controller("user")
@@ -22,15 +22,15 @@ export class UserController {
   }
 
   @Get()
-  async getAllUsers(): Promise<UserDtoResponse[]> {
+  async getAllUsers(): Promise<UserResponseDto[]> {
     return (await this.userService.getAllUsers()).map(
-      (userEntity) => new UserDtoResponse(userEntity),
+      (userEntity) => new UserResponseDto(userEntity),
     );
   }
 
   @Get("/:userId")
-  async getUserById(@Param("userId") userId: number): Promise<UserDtoResponse> {
-    return new UserDtoResponse(
+  async getUserById(@Param("userId") userId: number): Promise<UserResponseDto> {
+    return new UserResponseDto(
       await this.userService.getUserByIdUsingReferences(userId),
     );
   }

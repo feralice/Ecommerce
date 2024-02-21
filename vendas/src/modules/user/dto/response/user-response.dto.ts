@@ -1,7 +1,7 @@
 import { AddressResponseDto } from "@/modules/address/dto/response/response-address.dto";
 import { UserEntity } from "@/modules/user/entity/user.entity";
 
-export class UserDtoResponse {
+export class UserResponseDto {
   id: number;
   name: string;
   email: string;
