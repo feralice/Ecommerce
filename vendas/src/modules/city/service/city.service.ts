@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { CacheService } from "@/config/cache/cache.service";
+import { CityEntity } from "../entity/city.entity";
 import { InjectRepository } from "@nestjs/typeorm";
-import { CityEntity } from "./entity/city.entity";
 import { Repository } from "typeorm";
 
 @Injectable()

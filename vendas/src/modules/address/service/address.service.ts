@@ -1,7 +1,7 @@
 import { AddressEntity } from "@/modules/address/entity/address.entity";
-import { CreateAddressDto } from "./dto/request/create-address.dto";
-import { CityService } from "../city/city.service";
-import { UserService } from "../user/user.service";
+import { CreateAddressDto } from "../dto/request/create-address.dto";
+import { CityService } from "../../city/service/city.service";
+import { UserService } from "../../user/service/user.service";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Injectable } from "@nestjs/common";
 import { Repository } from "typeorm";

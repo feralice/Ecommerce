@@ -4,8 +4,8 @@ import {
   UnprocessableEntityException,
 } from "@nestjs/common";
 import { CreateUserDto } from "@/modules/user/dto/request/create-user.dto";
+import { UserEntity } from "../entity/user.entity";
 import { InjectRepository } from "@nestjs/typeorm";
-import { UserEntity } from "./entity/user.entity";
 import { Repository } from "typeorm";
 import { hash } from "bcrypt";
 

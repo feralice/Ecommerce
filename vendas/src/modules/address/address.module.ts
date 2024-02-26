@@ -1,6 +1,6 @@
+import { AddressService } from "./service/address.service";
 import { AddressController } from "./address.controller";
 import { AddressEntity } from "./entity/address.entity";
-import { AddressService } from "./address.service";
 import { CityModule } from "../city/city.module";
 import { UserModule } from "../user/user.module";
 import { TypeOrmModule } from "@nestjs/typeorm";
