@@ -1,5 +1,9 @@
-# Projeto de Estudo Pessoal - NestJS e React
+# Projeto de Estudo Pessoal - Ecommerce com NestJS e React
 
-Aprendendo sobre o desenvolvimento web utilizando NestJS (backend) e React (frontend) para a realização de um ecommerce
+Bem-vindo ao meu projeto de estudo pessoal! 📚 Este repositório é dedicado à minha exploração do desenvolvimento web com NestJS (backend) e React (frontend)
 
+Backend (NestJS)**:
+   - `cd vendas/`
+   - `npm install`
+   - `npm run start`
 
