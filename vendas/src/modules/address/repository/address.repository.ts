@@ -1,13 +1,8 @@
 import { CreateAddressDto } from "@/modules/address/dto/request/create-address.dto";
 import { AddressEntity } from "@/modules/address/entity/address.entity";
-import { EntityManager, Repository } from "typeorm";
-import { Injectable } from "@nestjs/common";
+import { Repository } from "typeorm";
 
-@Injectable()
 export class AddressRepository extends Repository<AddressEntity> {
-  constructor(manager: EntityManager) {
-    super(AddressEntity, manager);
-  }
   async createAddress(
     createAddress: CreateAddressDto,
     userId: number,

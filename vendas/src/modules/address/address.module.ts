@@ -1,7 +1,7 @@
+import { AddressRepository } from "@/modules/address/repository/address.repository";
 import { AddressService } from "@/modules/address/service/address.service";
 import { AddressController } from "@/modules/address/address.controller";
 import { AddressEntity } from "@/modules/address/entity/address.entity";
-import { AddressRepository } from "./repository/address.repository";
 import { CityModule } from "@/modules/city/city.module";
 import { UserModule } from "@/modules/user/user.module";
 import { TypeOrmModule } from "@nestjs/typeorm";
