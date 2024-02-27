@@ -1,40 +1,24 @@
 import {
   Injectable,
+  InternalServerErrorException,
   NotFoundException,
   UnprocessableEntityException,
 } from "@nestjs/common";
 import { CreateUserDto } from "@/modules/user/dto/request/create-user.dto";
-import { UserEntity } from "../entity/user.entity";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
-import { hash } from "bcrypt";
+import { UserRepository } from "@/modules/user/repository/user.repository";
+import { UserEntity } from "@/modules/user/entity/user.entity";
 
 @Injectable()
 export class UserService {
-  constructor(
-    @InjectRepository(UserEntity)
-    private readonly userRepository: Repository<UserEntity>,
-  ) {}
+  constructor(private readonly userRepository: UserRepository) {}
 
   async createUser(createUserDto: CreateUserDto): Promise<UserEntity> {
-    const saltOrRounds = 10;
-    const passwordHashed = await hash(createUserDto.password, saltOrRounds);
-
-    const user = await this.findUserByEmail(createUserDto.email).catch(
-      () => undefined,
-    );
-
-    if (user) {
-      throw new UnprocessableEntityException(
-        `User with email: ${createUserDto.email} already exists!`,
-      );
+    await this.findUserByEmail(createUserDto.email);
+    try {
+      return await this.userRepository.createUser(createUserDto);
+    } catch (error) {
+      throw new InternalServerErrorException("Error creating user!");
     }
-
-    return this.userRepository.save({
-      ...createUserDto,
-      typeUser: 1,
-      password: passwordHashed,
-    });
   }
 
   async getAllUsers(): Promise<UserEntity[]> {
@@ -42,45 +26,36 @@ export class UserService {
   }
 
   async findUserById(userId: number): Promise<UserEntity> {
-    const user = await this.userRepository.findOne({
-      where: {
-        id: userId,
-      },
-    });
-
-    if (!user) {
+    try {
+      return await this.userRepository.findUserById(userId);
+    } catch (error) {
       throw new NotFoundException(`User with userId: ${userId} not found!`);
     }
-
-    return user;
   }
 
   async getUserByIdUsingReferences(userId: number): Promise<UserEntity> {
-    return this.userRepository.findOne({
-      where: {
-        id: userId,
-      },
-      relations: {
-        addresses: {
-          city: {
-            state: true,
-          },
-        },
-      },
-    });
+    try {
+      return await this.userRepository.getUserByIdUsingReferences(userId);
+    } catch (error) {
+      throw new NotFoundException(`User with userId: ${userId} not found!`);
+    }
   }
 
   async findUserByEmail(userEmail: string): Promise<UserEntity> {
-    const user = await this.userRepository.findOne({
-      where: {
-        email: userEmail,
-      },
-    });
+    let user: UserEntity;
 
-    if (!user) {
-      throw new NotFoundException(`User with email: ${userEmail} not found!`);
+    try {
+      user = await this.userRepository.findUserByEmail(userEmail);
+    } catch (error) {
+      throw new InternalServerErrorException("Error finding user by email!");
     }
 
-    return user;
+    if (user) {
+      throw new UnprocessableEntityException(
+        `User with email: ${userEmail} already exists!`,
+      );
+    } else {
+      return null;
+    }
   }
 }

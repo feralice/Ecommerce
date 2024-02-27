@@ -1,4 +1,4 @@
-import { StateEntity } from "../../entity/state.entity";
+import { StateEntity } from "@/modules/state/entity/state.entity";
 
 export class StateResponseDto {
   name: string;

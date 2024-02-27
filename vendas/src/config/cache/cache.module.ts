@@ -1,5 +1,5 @@
 import { CacheModule as CacheModuleNest } from "@nestjs/cache-manager";
-import { CacheService } from "./cache.service";
+import { CacheService } from "@/config/cache/cache.service";
 import { Module } from "@nestjs/common";
 
 @Module({
