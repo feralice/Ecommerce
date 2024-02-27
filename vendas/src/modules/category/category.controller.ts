@@ -1,15 +1,17 @@
-import { Body, Controller, Post, UsePipes, ValidationPipe } from "@nestjs/common";
-import { CategoryEntity } from "./entity/category.entity";
+import { CategoryResponseDto } from "@/modules/category/dto/category-response.dto";
+import { CategoryService } from "@/modules/category/service/category.service";
+import { Controller, Get, UsePipes, ValidationPipe } from "@nestjs/common";
+import { UserType } from "@/modules/user/enum/user-type.enum";
+import { Roles } from "@/decorators/roles.decorator";
 
+@Roles(UserType.Admin, UserType.User)
 @Controller("category")
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
-  @Post()
+  @Get()
   @UsePipes(ValidationPipe)
-  async createCategory(
-    @Body() createCategory: CreateCategoryDto,
-  ): Promise<CategoryEntity> {
-    return this.categoryService.createCategory(createCategory);
+  async findAllCategories(): Promise<CategoryResponseDto[]> {
+    return this.categoryService.findAllCategories();
   }
 }

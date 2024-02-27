@@ -1,16 +1,16 @@
+import { CreateAddressDto } from "@/modules/address/dto/request/create-address.dto";
+import { AddressRepository } from "@/modules/address/repository/address.repository";
 import { AddressEntity } from "@/modules/address/entity/address.entity";
-import { CreateAddressDto } from "../dto/request/create-address.dto";
+import { CityService } from "@/modules/city/service/city.service";
+import { UserService } from "@/modules/user/service/user.service";
 import { Injectable, NotFoundException } from "@nestjs/common";
-import { CityService } from "../../city/service/city.service";
-import { UserService } from "../../user/service/user.service";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
 
 @Injectable()
 export class AddressService {
   constructor(
     @InjectRepository(AddressEntity)
-    private readonly addressRepository: Repository<AddressEntity>,
+    private readonly addressRepository: AddressRepository,
     private readonly userService: UserService,
     private readonly cityService: CityService,
   ) {}
@@ -19,25 +19,20 @@ export class AddressService {
     createAddress: CreateAddressDto,
     userId: number,
   ): Promise<AddressEntity> {
-    await this.userService.findUserById(userId);
-    await this.cityService.findCityById(createAddress.cityId);
-    return this.addressRepository.save({ ...createAddress, userId });
+    try {
+      await this.userService.findUserById(userId);
+      await this.cityService.findCityById(createAddress.cityId);
+      return this.addressRepository.createAddress(createAddress, userId);
+    } catch (error) {
+      throw new NotFoundException(error.message);
+    }
   }
 
   async findAddressByUserId(userId: number): Promise<AddressEntity[]> {
-    const addresses = await this.addressRepository.find({
-      where: {
-        userId,
-      },
-      relations: {
-        city: {
-          state: true,
-        },
-      },
-    });
-    if (!addresses || addresses.length === 0) {
+    try {
+      return await this.addressRepository.findAddressByUserId(userId);
+    } catch (error) {
       throw new NotFoundException("Address not found!");
     }
-    return addresses;
   }
 }

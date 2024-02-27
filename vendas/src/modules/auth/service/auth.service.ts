@@ -1,10 +1,10 @@
-import { UserResponseDto } from "../../user/dto/response/user-response.dto";
+import { UserResponseDto } from "@/modules/user/dto/response/user-response.dto";
+import { ReturnLoginDto } from "@/modules/auth/dto/return-login.dto";
+import { LoginPayload } from "@/modules/auth/dto/login-payload.dto";
 import { UserService } from "@/modules/user/service/user.service";
 import { UserEntity } from "@/modules/user/entity/user.entity";
 import { Injectable, NotFoundException } from "@nestjs/common";
-import { ReturnLoginDto } from "../dto/return-login.dto";
-import { LoginPayload } from "../dto/login-payload.dto";
-import { LoginDto } from "../dto/login.dto";
+import { LoginDto } from "@/modules/auth/dto/login.dto";
 import { JwtService } from "@nestjs/jwt";
 import { compare } from "bcrypt";
 

@@ -1,11 +1,11 @@
-import { createUserMock } from "../mocks/create-user.mock";
+import { createUserMock } from "@/modules/user/service/mocks/create-user.mock";
+import { userEntityMock } from "@/modules/user/service/mocks/user.mock";
+import { UserService } from "@/modules/user/service/user.service";
+import { UserEntity } from "@/modules/user/entity/user.entity";
+import { UserType } from "@/modules/user/enum/user-type.enum";
 import { Test, TestingModule } from "@nestjs/testing";
 import { getRepositoryToken } from "@nestjs/typeorm";
-import { userEntityMock } from "../mocks/user.mock";
-import { UserEntity } from "../entity/user.entity";
 import { NotFoundException } from "@nestjs/common";
-import { UserType } from "../enum/user-type.enum";
-import { UserService } from "./user.service";
 import { Repository } from "typeorm";
 
 describe("UserService", () => {
