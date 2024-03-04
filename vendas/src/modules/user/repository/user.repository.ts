@@ -1,6 +1,7 @@
 import { CreateUserDto } from "@/modules/user/dto/request/create-user.dto";
 import { UserEntity } from "@/modules/user/entity/user.entity";
 import { EntityManager, Repository } from "typeorm";
+import { UserType } from "../enum/user-type.enum";
 import { Injectable } from "@nestjs/common";
 import { hash } from "bcrypt";
 
@@ -16,7 +17,7 @@ export class UserRepository extends Repository<UserEntity> {
 
     return await this.save({
       ...createUserDto,
-      typeUser: 1,
+      typeUser: UserType.User,
       password: passwordHashed,
     });
   }

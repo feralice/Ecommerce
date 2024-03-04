@@ -1,8 +1,8 @@
 import {
+  ConflictException,
   Injectable,
   InternalServerErrorException,
   NotFoundException,
-  UnprocessableEntityException,
 } from "@nestjs/common";
 import { CreateUserDto } from "@/modules/user/dto/request/create-user.dto";
 import { UserRepository } from "@/modules/user/repository/user.repository";
@@ -13,7 +13,13 @@ export class UserService {
   constructor(private readonly userRepository: UserRepository) {}
 
   async createUser(createUserDto: CreateUserDto): Promise<UserEntity> {
-    await this.findUserByEmail(createUserDto.email);
+    const user = await this.findUserByEmail(createUserDto.email);
+
+    if (user) {
+      throw new ConflictException(
+        `User with email: ${createUserDto.email} already exist!`,
+      );
+    }
     try {
       return await this.userRepository.createUser(createUserDto);
     } catch (error) {
@@ -42,20 +48,10 @@ export class UserService {
   }
 
   async findUserByEmail(userEmail: string): Promise<UserEntity> {
-    let user: UserEntity;
-
     try {
-      user = await this.userRepository.findUserByEmail(userEmail);
+      return await this.userRepository.findUserByEmail(userEmail);
     } catch (error) {
       throw new InternalServerErrorException("Error finding user by email!");
-    }
-
-    if (user) {
-      throw new UnprocessableEntityException(
-        `User with email: ${userEmail} already exists!`,
-      );
-    } else {
-      return null;
     }
   }
 }
