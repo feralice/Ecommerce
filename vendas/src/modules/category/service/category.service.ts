@@ -48,4 +48,12 @@ export class CategoryService {
       );
     }
   }
+
+  async findCategoryById(categoryId: number): Promise<CategoryEntity> {
+    try {
+      return await this.categoryRepository.findCategoryById(categoryId);
+    } catch (error) {
+      throw new NotFoundException(`Category with id '${categoryId}' not found!`);
+    }
+  }
 }

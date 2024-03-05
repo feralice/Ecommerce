@@ -1,5 +1,6 @@
 import { CategoryModule } from "@/modules/category/category.module";
 import { AddressModule } from "@/modules/address/address.module";
+import { ProductModule } from "@/modules/product/product.module";
 import { StateModule } from "@/modules/state/state.module";
 import { CityModule } from "@/modules/city/city.module";
 import { UserModule } from "@/modules/user/user.module";
@@ -20,6 +21,7 @@ import { JwtModule } from "@nestjs/jwt";
     AuthModule,
     JwtModule,
     CategoryModule,
+    ProductModule,
   ],
   controllers: [],
   providers: [

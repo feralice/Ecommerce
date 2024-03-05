@@ -25,4 +25,12 @@ export class CategoryRepository extends Repository<CategoryEntity> {
       },
     });
   }
+
+  async findCategoryById(categoryId: number): Promise<CategoryEntity> {
+    return await this.findOne({
+      where: {
+        id: categoryId,
+      },
+    });
+  }
 }
