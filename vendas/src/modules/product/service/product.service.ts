@@ -1,7 +1,7 @@
+import { ProductRepository } from "@/modules/product/repository/product.repository";
+import { CreateProductBodyDto } from "@/modules/product/dto/create-product.dto";
 import { CategoryService } from "@/modules/category/service/category.service";
-import { ProductRepository } from "../repository/product.repository";
-import { CreateProductBodyDto } from "../dto/create-product.dto";
-import { ProductEntity } from "../entity/product.entity";
+import { ProductEntity } from "@/modules/product/entity/product.entity";
 import { Injectable } from "@nestjs/common";
 
 @Injectable()
