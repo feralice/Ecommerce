@@ -31,4 +31,14 @@ export class ProductRepository extends Repository<ProductEntity> {
   async deleteProduct(product: ProductEntity): Promise<DeleteResult> {
     return this.delete({ id: product.id });
   }
+
+  async updateProduct(
+    product: ProductEntity,
+    updateProduct: CreateProductBodyDto,
+  ): Promise<ProductEntity> {
+    return await this.save({
+      ...product,
+      ...updateProduct,
+    });
+  }
 }

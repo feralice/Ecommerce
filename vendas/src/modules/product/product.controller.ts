@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   Post,
+  Put,
   UsePipes,
   ValidationPipe,
 } from "@nestjs/common";
@@ -45,11 +46,20 @@ export class ProductController {
   }
 
   @Roles(UserType.Admin, UserType.User)
-  @UsePipes(ValidationPipe)
   @Get("/:productId")
   async findProductById(
     @Param("productId") productId: number,
   ): Promise<ProductEntity> {
     return await this.productService.findProductById(productId);
+  }
+
+  @Roles(UserType.Admin)
+  @UsePipes(ValidationPipe)
+  @Put("/:productId")
+  async updateProduct(
+    @Param("productId") productId: number,
+    @Body() updateProduct: CreateProductBodyDto,
+  ): Promise<ProductEntity> {
+    return await this.productService.updateProduct(productId, updateProduct);
   }
 }

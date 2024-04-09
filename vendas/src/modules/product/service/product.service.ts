@@ -51,4 +51,17 @@ export class ProductService {
       throw new NotFoundException(error);
     }
   }
+
+  async updateProduct(
+    productId: number,
+    updateProduct: CreateProductBodyDto,
+  ): Promise<ProductEntity> {
+    try {
+      const product = await this.productRepository.getProductById(productId);
+
+      return await this.productRepository.updateProduct(product, updateProduct);
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
 }
