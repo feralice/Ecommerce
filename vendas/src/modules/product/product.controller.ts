@@ -1,7 +1,9 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
+  Param,
   Post,
   UsePipes,
   ValidationPipe,
@@ -12,6 +14,7 @@ import { ProductService } from "@/modules/product/service/product.service";
 import { ProductEntity } from "@/modules/product/entity/product.entity";
 import { UserType } from "@/modules/user/enum/user-type.enum";
 import { Roles } from "@/decorators/roles.decorator";
+import { DeleteResult } from "typeorm";
 
 @Controller("product")
 @Roles(UserType.Admin, UserType.User)
@@ -30,5 +33,23 @@ export class ProductController {
     @Body() createProduct: CreateProductBodyDto,
   ): Promise<ProductEntity> {
     return await this.productService.createProduct(createProduct);
+  }
+
+  @Roles(UserType.Admin)
+  @UsePipes(ValidationPipe)
+  @Delete("/:productId")
+  async deleteProduct(
+    @Param("productId") productId: number,
+  ): Promise<DeleteResult> {
+    return await this.productService.deleteProduct(productId);
+  }
+
+  @Roles(UserType.Admin, UserType.User)
+  @UsePipes(ValidationPipe)
+  @Get("/:productId")
+  async findProductById(
+    @Param("productId") productId: number,
+  ): Promise<ProductEntity> {
+    return await this.productService.findProductById(productId);
   }
 }

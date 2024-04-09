@@ -4,7 +4,6 @@ import { AddressEntity } from "@/modules/address/entity/address.entity";
 import { CityService } from "@/modules/city/service/city.service";
 import { UserService } from "@/modules/user/service/user.service";
 import { Injectable, NotFoundException } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
 
 @Injectable()
 export class AddressService {

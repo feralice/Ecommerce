@@ -1,9 +1,11 @@
 import { CreateUserDto } from "@/modules/user/dto/request/create-user.dto";
 
-export const createUserMock: CreateUserDto = {
-  cpf: "3214215151",
-  email: "emailMockTest@email.com",
-  name: "qudlsjakf",
-  password: "password",
-  phone: "325632634",
+export const createUserMock = (): CreateUserDto => {
+  return {
+    cpf: "3214215151",
+    email: "emailMockTest@email.com",
+    name: "qudlsjakf",
+    password: "password",
+    phone: "325632634",
+  };
 };
