@@ -2,8 +2,8 @@ import { CreateUserDto } from "@/modules/user/dto/request/create-user.dto";
 import { UserEntity } from "@/modules/user/entity/user.entity";
 import { EntityManager, Repository } from "typeorm";
 import { UserType } from "../enum/user-type.enum";
+import { hashPassword } from "@/utils/password";
 import { Injectable } from "@nestjs/common";
-import { hash } from "bcrypt";
 
 @Injectable()
 export class UserRepository extends Repository<UserEntity> {
@@ -12,8 +12,7 @@ export class UserRepository extends Repository<UserEntity> {
   }
 
   async createUser(createUserDto: CreateUserDto): Promise<UserEntity> {
-    const saltOrRounds = 10;
-    const passwordHashed = await hash(createUserDto.password, saltOrRounds);
+    const passwordHashed = await hashPassword(createUserDto.password);
 
     return await this.save({
       ...createUserDto,
@@ -50,6 +49,16 @@ export class UserRepository extends Repository<UserEntity> {
       where: {
         email: userEmail,
       },
+    });
+  }
+
+  async updateUserPassword(
+    user: UserEntity,
+    newPasswordHashed: string,
+  ): Promise<UserEntity> {
+    return await this.save({
+      ...user,
+      password: newPasswordHashed,
     });
   }
 }
