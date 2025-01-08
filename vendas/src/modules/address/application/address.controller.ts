@@ -1,3 +1,4 @@
+import { AddressResponseDto } from "@/modules/address/application/dto/response/response-address.dto";
 import {
   Body,
   Controller,
@@ -6,10 +7,9 @@ import {
   UsePipes,
   ValidationPipe,
 } from "@nestjs/common";
-import { AddressResponseDto } from "@/modules/address/dto/response/response-address.dto";
-import { CreateAddressDto } from "@/modules/address/dto/request/create-address.dto";
-import { AddressService } from "@/modules/address/service/address.service";
-import { AddressEntity } from "@/modules/address/entity/address.entity";
+import { CreateAddressDto } from "@/modules/address/application/dto/request/create-address.dto";
+import { AddressService } from "@/modules/address/domain/service/address.service";
+import { AddressEntity } from "@/modules/address/domain/entity/address.entity";
 import { UserType } from "@/modules/user/enum/user-type.enum";
 import { UserId } from "@/decorators/user-id.decorator";
 import { Roles } from "@/decorators/roles.decorator";

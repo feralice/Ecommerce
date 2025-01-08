@@ -1,4 +1,4 @@
-import { AddressResponseDto } from "@/modules/address/dto/response/response-address.dto";
+import { AddressResponseDto } from "@/modules/address/application/dto/response/response-address.dto";
 import { UserEntity } from "@/modules/user/entity/user.entity";
 
 export class UserResponseDto {

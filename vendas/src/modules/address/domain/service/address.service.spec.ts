@@ -1,4 +1,4 @@
-import { AddressRepository } from "@/modules/address/repository/address.repository";
+import { AddressRepository } from "@/modules/address/infrastructure/repository/address.repository";
 import { userEntityMock } from "@/modules/user/service/mocks/user-entity.mock";
 import { AddressService } from "@/modules/address/service/address.service";
 import { mockCity } from "@/modules/city/service/mocks/city-entity.mock";

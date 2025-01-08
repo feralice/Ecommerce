@@ -6,9 +6,9 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from "@nestjs/common";
+import { UpdatePasswordDto } from "@/modules/user/dto/request/update-password.dto";
 import { CreateUserDto } from "@/modules/user/dto/request/create-user.dto";
 import { UserRepository } from "@/modules/user/repository/user.repository";
-import { UpdatePasswordDto } from "../dto/request/update-password.dto";
 import { hashPassword, validatePassword } from "@/utils/password";
 import { UserEntity } from "@/modules/user/entity/user.entity";
 

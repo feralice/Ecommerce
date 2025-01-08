@@ -1,5 +1,5 @@
+import { AddressEntity } from "@/modules/address/domain/entity/address.entity";
 import { CityResponseDto } from "@/modules/city/dto/city-response.dto";
-import { AddressEntity } from "@/modules/address/entity/address.entity";
 
 export class AddressResponseDto {
   complement: string;

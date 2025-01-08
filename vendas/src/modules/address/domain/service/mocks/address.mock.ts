@@ -1,4 +1,4 @@
-import { CreateAddressDto } from "@/modules/address/dto/request/create-address.dto";
+import { CreateAddressDto } from "@/modules/address/application/dto/request/create-address.dto";
 
 export const createAddressDto = (): CreateAddressDto => {
   return {

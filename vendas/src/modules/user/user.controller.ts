@@ -39,7 +39,7 @@ export class UserController {
     );
   }
 
-  @Patch()
+  @Patch("/change-password")
   @UsePipes(ValidationPipe)
   async updateUserPassword(
     @UserId() userId: number,

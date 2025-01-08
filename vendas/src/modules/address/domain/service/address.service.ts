@@ -1,6 +1,6 @@
-import { CreateAddressDto } from "@/modules/address/dto/request/create-address.dto";
-import { AddressRepository } from "@/modules/address/repository/address.repository";
-import { AddressEntity } from "@/modules/address/entity/address.entity";
+import { AddressRepository } from "@/modules/address/infrastructure/repository/address.repository";
+import { CreateAddressDto } from "@/modules/address/application/dto/request/create-address.dto";
+import { AddressEntity } from "@/modules/address/domain/entity/address.entity";
 import { CityService } from "@/modules/city/service/city.service";
 import { UserService } from "@/modules/user/service/user.service";
 import { Injectable, NotFoundException } from "@nestjs/common";

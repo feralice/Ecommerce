@@ -1,5 +1,5 @@
-import { CreateAddressDto } from "@/modules/address/dto/request/create-address.dto";
-import { AddressEntity } from "@/modules/address/entity/address.entity";
+import { CreateAddressDto } from "@/modules/address/application/dto/request/create-address.dto";
+import { AddressEntity } from "@/modules/address/domain/entity/address.entity";
 import { Repository } from "typeorm";
 
 export class AddressRepository extends Repository<AddressEntity> {
