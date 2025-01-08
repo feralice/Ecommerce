@@ -1,4 +1,4 @@
-import { CityEntity } from "@/modules/city/entity/city.entity";
+import { CityEntity } from "@/modules/city/domain/entity/city.entity";
 
 export const mockCity = (): CityEntity => {
   return {

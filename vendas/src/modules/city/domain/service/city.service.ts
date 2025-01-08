@@ -1,5 +1,5 @@
-import { CityRepository } from "@/modules/city/repository/city.repository";
-import { CityEntity } from "@/modules/city/entity/city.entity";
+import { CityRepository } from "@/modules/city/infrastructure/repository/city.repository";
+import { CityEntity } from "@/modules/city/domain/entity/city.entity";
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { CacheService } from "@/config/cache/cache.service";
 

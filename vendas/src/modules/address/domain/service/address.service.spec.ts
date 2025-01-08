@@ -1,8 +1,8 @@
 import { AddressRepository } from "@/modules/address/infrastructure/repository/address.repository";
+import { mockCity } from "@/modules/city/domain/service/mocks/city-entity.mock";
 import { userEntityMock } from "@/modules/user/service/mocks/user-entity.mock";
 import { AddressService } from "@/modules/address/service/address.service";
-import { mockCity } from "@/modules/city/service/mocks/city-entity.mock";
-import { CityService } from "@/modules/city/service/city.service";
+import { CityService } from "@/modules/city/domain/service/city.service";
 import { UserService } from "@/modules/user/service/user.service";
 import { AddressEntity } from "../entity/address.entity";
 import { createAddressDto } from "./mocks/address.mock";

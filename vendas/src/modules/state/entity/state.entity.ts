@@ -6,7 +6,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { CityEntity } from "@/modules/city/entity/city.entity";
+import { CityEntity } from "@/modules/city/domain/entity/city.entity";
 
 @Entity({ name: "state" })
 export class StateEntity {

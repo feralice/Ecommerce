@@ -1,7 +1,7 @@
-import { CityService } from "@/modules/city/service/city.service";
-import { CityController } from "@/modules/city/city.controller";
-import { CityEntity } from "@/modules/city/entity/city.entity";
-import { CityRepository } from "./repository/city.repository";
+import { CityRepository } from "./infrastructure/repository/city.repository";
+import { CityController } from "@/modules/city/application/city.controller";
+import { CityService } from "@/modules/city/domain/service/city.service";
+import { CityEntity } from "@/modules/city/domain/entity/city.entity";
 import { CacheModule } from "@/config/cache/cache.module";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { Module } from "@nestjs/common";

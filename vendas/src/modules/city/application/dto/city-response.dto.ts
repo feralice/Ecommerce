@@ -1,5 +1,5 @@
 import { StateResponseDto } from "@/modules/state/dto/response/state-response.dto";
-import { CityEntity } from "@/modules/city/entity/city.entity";
+import { CityEntity } from "@/modules/city/domain/entity/city.entity";
 
 export class CityResponseDto {
   name: string;

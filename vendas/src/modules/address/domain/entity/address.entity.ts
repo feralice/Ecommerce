@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { CityEntity } from "@/modules/city/entity/city.entity";
+import { CityEntity } from "@/modules/city/domain/entity/city.entity";
 import { UserEntity } from "@/modules/user/entity/user.entity";
 
 @Entity({ name: "address" })

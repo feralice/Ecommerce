@@ -1,5 +1,5 @@
-import { CityService } from "@/modules/city/service/city.service";
-import { CityEntity } from "@/modules/city/entity/city.entity";
+import { CityService } from "@/modules/city/domain/service/city.service";
+import { CityEntity } from "@/modules/city/domain/entity/city.entity";
 import { Controller, Get, Param } from "@nestjs/common";
 
 @Controller("city")
