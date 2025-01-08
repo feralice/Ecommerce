@@ -1,5 +1,5 @@
-import { CategoryEntity } from "@/modules/category/entity/category.entity";
-import { CreateCategoryDto } from "../dto/create-category.dto";
+import { CreateCategoryDto } from "@/modules/category/application/dto/create-category.dto";
+import { CategoryEntity } from "@/modules/category/domain/entity/category.entity";
 import { EntityManager, Repository } from "typeorm";
 import { Injectable } from "@nestjs/common";
 

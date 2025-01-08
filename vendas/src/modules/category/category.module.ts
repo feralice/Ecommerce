@@ -1,7 +1,7 @@
-import { CategoryRepository } from "@/modules/category/repository/category.repository";
-import { CategoryService } from "@/modules/category/service/category.service";
-import { CategoryController } from "@/modules/category/category.controller";
-import { CategoryEntity } from "@/modules/category/entity/category.entity";
+import { CategoryRepository } from "@/modules/category/infrastructure/repository/category.repository";
+import { CategoryController } from "@/modules/category/application/category.controller";
+import { CategoryService } from "@/modules/category/domain/service/category.service";
+import { CategoryEntity } from "@/modules/category/domain/entity/category.entity";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { Module } from "@nestjs/common";
 

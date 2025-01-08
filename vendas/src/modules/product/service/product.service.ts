@@ -1,6 +1,6 @@
+import { CategoryService } from "@/modules/category/domain/service/category.service";
 import { ProductRepository } from "@/modules/product/repository/product.repository";
 import { CreateProductBodyDto } from "@/modules/product/dto/create-product.dto";
-import { CategoryService } from "@/modules/category/service/category.service";
 import { ProductEntity } from "@/modules/product/entity/product.entity";
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { DeleteResult } from "typeorm";

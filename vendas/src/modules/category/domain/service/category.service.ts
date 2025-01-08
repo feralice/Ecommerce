@@ -4,9 +4,9 @@ import {
   InternalServerErrorException,
   NotFoundException,
 } from "@nestjs/common";
-import { CategoryRepository } from "@/modules/category/repository/category.repository";
-import { CreateCategoryDto } from "@/modules/category/dto/create-category.dto";
-import { CategoryEntity } from "@/modules/category/entity/category.entity";
+import { CategoryRepository } from "@/modules/category/infrastructure/repository/category.repository";
+import { CreateCategoryDto } from "@/modules/category/application/dto/create-category.dto";
+import { CategoryEntity } from "@/modules/category/domain/entity/category.entity";
 
 @Injectable()
 export class CategoryService {
@@ -53,7 +53,9 @@ export class CategoryService {
     try {
       return await this.categoryRepository.findCategoryById(categoryId);
     } catch (error) {
-      throw new NotFoundException(`Category with id '${categoryId}' not found!`);
+      throw new NotFoundException(
+        `Category with id '${categoryId}' not found!`,
+      );
     }
   }
 }
