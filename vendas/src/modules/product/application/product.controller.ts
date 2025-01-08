@@ -9,11 +9,11 @@ import {
   UsePipes,
   ValidationPipe,
 } from "@nestjs/common";
-import { ProductResponseDto } from "@/modules/product/dto/product-response.dto";
-import { CreateProductBodyDto } from "@/modules/product/dto/create-product.dto";
-import { ProductService } from "@/modules/product/service/product.service";
-import { ProductEntity } from "@/modules/product/entity/product.entity";
-import { UserType } from "@/modules/user/enum/user-type.enum";
+import { ProductResponseDto } from "@/modules/product/application/dto/product-response.dto";
+import { CreateProductBodyDto } from "@/modules/product/application/dto/create-product.dto";
+import { ProductService } from "@/modules/product/domain/service/product.service";
+import { ProductEntity } from "@/modules/product/domain/entity/product.entity";
+import { UserType } from "@/modules/user/application/enum/user-type.enum";
 import { Roles } from "@/decorators/roles.decorator";
 import { DeleteResult } from "typeorm";
 

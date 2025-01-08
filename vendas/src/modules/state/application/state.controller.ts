@@ -1,5 +1,5 @@
-import { StateService } from "@/modules/state/service/state.service";
-import { StateEntity } from "@/modules/state/entity/state.entity";
+import { StateEntity } from "@/modules/state/domain/entity/state.entity";
+import { StateService } from "@/modules/state/domain/service/state.service";
 import { Controller, Get } from "@nestjs/common";
 
 @Controller("state")

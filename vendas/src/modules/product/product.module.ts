@@ -1,7 +1,7 @@
-import { ProductRepository } from "@/modules/product/repository/product.repository";
-import { ProductService } from "@/modules/product/service/product.service";
-import { ProductController } from "@/modules/product/product.controller";
-import { ProductEntity } from "@/modules/product/entity/product.entity";
+import { ProductRepository } from "@/modules/product/infrastructure/repository/product.repository";
+import { ProductController } from "@/modules/product/application/product.controller";
+import { ProductService } from "@/modules/product/domain/service/product.service";
+import { ProductEntity } from "@/modules/product/domain/entity/product.entity";
 import { CategoryModule } from "@/modules/category/category.module";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { Module } from "@nestjs/common";

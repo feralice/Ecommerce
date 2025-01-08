@@ -1,4 +1,4 @@
-import { UserResponseDto } from "@/modules/user/dto/response/user-response.dto";
+import { UserResponseDto } from "@/modules/user/application/dto/response/user-response.dto";
 
 export class ReturnLoginDto {
   user: UserResponseDto;

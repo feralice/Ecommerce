@@ -1,4 +1,4 @@
-import { CreateUserDto } from "@/modules/user/dto/request/create-user.dto";
+import { CreateUserDto } from "@/modules/user/application/dto/request/create-user.dto";
 
 export const createUserMock = (): CreateUserDto => {
   return {

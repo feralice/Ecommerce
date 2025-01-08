@@ -1,9 +1,10 @@
-import { UserService } from "@/modules/user/service/user.service";
-import { UserController } from "@/modules/user/user.controller";
-import { UserEntity } from "@/modules/user/entity/user.entity";
-import { UserRepository } from "./repository/user.repository";
-import { TypeOrmModule } from "@nestjs/typeorm";
+import { UserController } from "@/modules/user/application/user.controller";
+import { UserEntity } from "@/modules/user/domain/entity/user.entity";
+import { UserService } from "@/modules/user/domain/service/user.service";
+import { UserRepository } from "@/modules/user/infrastructure/repository/user.repository";
 import { Module } from "@nestjs/common";
+import { TypeOrmModule } from "@nestjs/typeorm";
+
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserEntity])],

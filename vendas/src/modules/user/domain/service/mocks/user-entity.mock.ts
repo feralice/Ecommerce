@@ -1,5 +1,5 @@
-import { UserEntity } from "@/modules/user/entity/user.entity";
-import { UserType } from "@/modules/user/enum/user-type.enum";
+import { UserType } from "@/modules/user/application/enum/user-type.enum";
+import { UserEntity } from "@/modules/user/domain/entity/user.entity";
 
 export const userEntityMock = (): UserEntity => {
   return {

@@ -1,4 +1,4 @@
-import { StateResponseDto } from "@/modules/state/dto/response/state-response.dto";
+import { StateResponseDto } from "@/modules/state/application/dto/response/state-response.dto";
 import { CityEntity } from "@/modules/city/domain/entity/city.entity";
 
 export class CityResponseDto {

@@ -1,5 +1,5 @@
 import { AddressResponseDto } from "@/modules/address/application/dto/response/response-address.dto";
-import { UserEntity } from "@/modules/user/entity/user.entity";
+import { UserEntity } from "@/modules/user/domain/entity/user.entity";
 
 export class UserResponseDto {
   id: number;

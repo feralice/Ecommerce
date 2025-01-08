@@ -1,7 +1,7 @@
+import { mockProductEntity } from "@/modules/product/domain/service/mock/product.mock";
+import { ProductRepository } from "../../infrastructure/repository/product.repository";
 import { mockCategoryEntity } from "@/modules/category/service/mock/category.mock";
-import { mockProductEntity } from "@/modules/product/service/mock/product.mock";
 import { CategoryService } from "@/modules/category/service/category.service";
-import { ProductRepository } from "../repository/product.repository";
 import { Test, TestingModule } from "@nestjs/testing";
 import { ProductService } from "./product.service";
 

@@ -1,3 +1,9 @@
+import { UserId } from "@/decorators/user-id.decorator";
+import { CreateUserDto } from "@/modules/user/application/dto/request/create-user.dto";
+import { UpdatePasswordDto } from "@/modules/user/application/dto/request/update-password.dto";
+import { UserResponseDto } from "@/modules/user/application/dto/response/user-response.dto";
+import { UserEntity } from "@/modules/user/domain/entity/user.entity";
+import { UserService } from "@/modules/user/domain/service/user.service";
 import {
   Body,
   Controller,
@@ -8,12 +14,6 @@ import {
   UsePipes,
   ValidationPipe,
 } from "@nestjs/common";
-import { CreateUserDto } from "@/modules/user/dto/request/create-user.dto";
-import { UpdatePasswordDto } from "./dto/request/update-password.dto";
-import { UserResponseDto } from "./dto/response/user-response.dto";
-import { UserId } from "@/decorators/user-id.decorator";
-import { UserService } from "./service/user.service";
-import { UserEntity } from "./entity/user.entity";
 
 @Controller("user")
 export class UserController {

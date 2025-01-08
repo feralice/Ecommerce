@@ -1,9 +1,9 @@
-import { CreateUserDto } from "@/modules/user/dto/request/create-user.dto";
-import { UserEntity } from "@/modules/user/entity/user.entity";
-import { EntityManager, Repository } from "typeorm";
-import { UserType } from "../enum/user-type.enum";
+import { CreateUserDto } from "@/modules/user/application/dto/request/create-user.dto";
+import { UserType } from "@/modules/user/application/enum/user-type.enum";
+import { UserEntity } from "@/modules/user/domain/entity/user.entity";
 import { hashPassword } from "@/utils/password";
 import { Injectable } from "@nestjs/common";
+import { EntityManager, Repository } from "typeorm";
 
 @Injectable()
 export class UserRepository extends Repository<UserEntity> {

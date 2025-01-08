@@ -8,7 +8,7 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import { CityEntity } from "@/modules/city/domain/entity/city.entity";
-import { UserEntity } from "@/modules/user/entity/user.entity";
+import { UserEntity } from "@/modules/user/domain/entity/user.entity";
 
 @Entity({ name: "address" })
 export class AddressEntity {

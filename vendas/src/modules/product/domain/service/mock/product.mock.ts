@@ -1,5 +1,5 @@
 import { mockCategoryEntity } from "@/modules/category/domain/service/mock/category.mock";
-import { ProductEntity } from "@/modules/product/entity/product.entity";
+import { ProductEntity } from "@/modules/product/domain/entity/product.entity";
 
 export const mockProductEntity = (): ProductEntity[] => {
   const product1: ProductEntity = {

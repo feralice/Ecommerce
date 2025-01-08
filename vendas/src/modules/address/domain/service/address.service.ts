@@ -2,7 +2,7 @@ import { AddressRepository } from "@/modules/address/infrastructure/repository/a
 import { CreateAddressDto } from "@/modules/address/application/dto/request/create-address.dto";
 import { AddressEntity } from "@/modules/address/domain/entity/address.entity";
 import { CityService } from "@/modules/city/domain/service/city.service";
-import { UserService } from "@/modules/user/service/user.service";
+import { UserService } from "@/modules/user/domain/service/user.service";
 import { Injectable, NotFoundException } from "@nestjs/common";
 
 @Injectable()

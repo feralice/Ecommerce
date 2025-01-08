@@ -1,5 +1,5 @@
-import { CreateProductBodyDto } from "@/modules/product/dto/create-product.dto";
-import { ProductEntity } from "@/modules/product/entity/product.entity";
+import { CreateProductBodyDto } from "@/modules/product/application/dto/create-product.dto";
+import { ProductEntity } from "@/modules/product/domain/entity/product.entity";
 import { DeleteResult, EntityManager, Repository } from "typeorm";
 import { Injectable } from "@nestjs/common";
 

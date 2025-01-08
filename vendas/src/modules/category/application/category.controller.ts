@@ -10,7 +10,7 @@ import { CategoryResponseDto } from "@/modules/category/application/dto/category
 import { CreateCategoryDto } from "@/modules/category/application/dto/create-category.dto";
 import { CategoryService } from "@/modules/category/domain/service/category.service";
 import { CategoryEntity } from "@/modules/category/domain/entity/category.entity";
-import { UserType } from "@/modules/user/enum/user-type.enum";
+import { UserType } from "@/modules/user/application/enum/user-type.enum";
 import { Roles } from "@/decorators/roles.decorator";
 
 @Roles(UserType.Admin, UserType.User)

@@ -1,15 +1,15 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from "typeorm";
 import { AddressEntity } from "@/modules/address/domain/entity/address.entity";
-import { StateEntity } from "@/modules/state/entity/state.entity";
+import { StateEntity } from "@/modules/state/domain/entity/state.entity";
+import {
+    Column,
+    CreateDateColumn,
+    Entity,
+    JoinColumn,
+    ManyToOne,
+    OneToMany,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn,
+} from "typeorm";
 
 @Entity({ name: "city" })
 export class CityEntity {
