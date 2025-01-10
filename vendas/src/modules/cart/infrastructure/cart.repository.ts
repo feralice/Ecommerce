@@ -23,6 +23,4 @@ export class CartRepository extends Repository<CartEntity> {
       active: true,
     });
   }
-
-  
 }
