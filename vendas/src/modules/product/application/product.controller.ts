@@ -6,8 +6,6 @@ import {
   Param,
   Post,
   Put,
-  UsePipes,
-  ValidationPipe,
 } from "@nestjs/common";
 import { ProductResponseDto } from "@/modules/product/application/dto/product-response.dto";
 import { CreateProductBodyDto } from "@/modules/product/application/dto/create-product.dto";
@@ -27,8 +25,7 @@ export class ProductController {
     return await this.productService.findAllProduct();
   }
 
-  @Roles(UserType.Admin)
-  @UsePipes(ValidationPipe)
+  @Roles(UserType.Admin, UserType.User)
   @Post("/create-product")
   async createProduct(
     @Body() createProduct: CreateProductBodyDto,
@@ -37,7 +34,6 @@ export class ProductController {
   }
 
   @Roles(UserType.Admin)
-  @UsePipes(ValidationPipe)
   @Delete("/:productId")
   async deleteProduct(
     @Param("productId") productId: number,
@@ -54,7 +50,6 @@ export class ProductController {
   }
 
   @Roles(UserType.Admin)
-  @UsePipes(ValidationPipe)
   @Put("/:productId")
   async updateProduct(
     @Param("productId") productId: number,

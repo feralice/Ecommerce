@@ -4,9 +4,11 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { CartProductEntity } from "@/modules/cart-product/domain/cart-product.entity";
 import { CategoryEntity } from "@/modules/category/domain/entity/category.entity";
 
 @Entity({ name: "product" })
@@ -35,4 +37,7 @@ export class ProductEntity {
   @ManyToOne(() => CategoryEntity, (category) => category.products)
   @JoinColumn({ name: "category_id", referencedColumnName: "id" })
   category?: CategoryEntity;
+
+  @OneToMany(() => CartProductEntity, (cartProduct) => cartProduct.product)
+  cartProduct?: CartProductEntity[];
 }

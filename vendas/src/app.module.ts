@@ -1,7 +1,9 @@
+import { CartProductModule } from "@/modules/cart-product/cart-product.module";
 import { CategoryModule } from "@/modules/category/category.module";
 import { AddressModule } from "@/modules/address/address.module";
 import { ProductModule } from "@/modules/product/product.module";
 import { StateModule } from "@/modules/state/state.module";
+import { CartModule } from "@/modules/cart/cart.module";
 import { CityModule } from "@/modules/city/city.module";
 import { UserModule } from "@/modules/user/user.module";
 import { AuthModule } from "./modules/auth/auth.module";
@@ -21,6 +23,8 @@ import { JwtModule } from "@nestjs/jwt";
     AuthModule,
     JwtModule,
     CategoryModule,
+    CartModule,
+    CartProductModule,
     ProductModule,
   ],
   controllers: [],
