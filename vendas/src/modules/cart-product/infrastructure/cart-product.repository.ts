@@ -1,7 +1,7 @@
 import { CartProductEntity } from "@/modules/cart-product/domain/cart-product.entity";
 import { CartRequestDto } from "@/modules/cart/application/dto/cart.dto";
 import { Injectable, NotFoundException } from "@nestjs/common";
-import { EntityManager, Repository } from "typeorm";
+import { DeleteResult, EntityManager, Repository } from "typeorm";
 
 @Injectable()
 export class CartProductRepository extends Repository<CartProductEntity> {
@@ -44,5 +44,12 @@ export class CartProductRepository extends Repository<CartProductEntity> {
   ): Promise<CartProductEntity> {
     cartProduct.amount += additionalAmount;
     return this.save(cartProduct);
+  }
+
+  async deleteProductInCart(productId: number, cartId: number): Promise<DeleteResult> {
+    return await this.delete({
+      productId,
+      cartId,
+    });
   }
 }
