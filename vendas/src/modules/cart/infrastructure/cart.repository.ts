@@ -1,5 +1,5 @@
+import { DeleteResult, EntityManager, Repository } from "typeorm";
 import { CartEntity } from "@/modules/cart/domain/cart.entity";
-import { EntityManager, Repository } from "typeorm";
 import { Injectable } from "@nestjs/common";
 
 @Injectable()
@@ -8,12 +8,23 @@ export class CartRepository extends Repository<CartEntity> {
     super(CartEntity, manager);
   }
 
-  async verifyCartExists(userId: number): Promise<CartEntity> {
+  async verifyCartExists(
+    userId: number,
+    isRelations?: boolean,
+  ): Promise<CartEntity> {
+    const relations = isRelations
+      ? {
+          cartProduct: {
+            product: true,
+          },
+        }
+      : undefined;
     return await this.findOne({
       where: {
         userId,
         active: true,
       },
+      relations,
     });
   }
 
@@ -22,5 +33,17 @@ export class CartRepository extends Repository<CartEntity> {
       userId,
       active: true,
     });
+  }
+
+  async clearCart(cart: CartEntity): Promise<DeleteResult> {
+    //apenas desativando para deixar histórico
+    await this.save({
+      ...cart,
+      active: false,
+    });
+    return {
+      raw: {},
+      affected: 1,
+    };
   }
 }
