@@ -1,6 +1,8 @@
 import { CartProductRepository } from "@/modules/cart-product/infrastructure/cart-product.repository";
+import { Injectable } from "@nestjs/common";
 import { DeleteResult } from "typeorm";
 
+@Injectable()
 export class DeleteCartProductService {
   constructor(private readonly cartProductRepository: CartProductRepository) {}
 

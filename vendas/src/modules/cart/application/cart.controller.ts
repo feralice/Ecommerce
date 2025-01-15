@@ -36,7 +36,6 @@ export class CartController {
     private readonly updateProductInCartUseCase: UpdateProductInCartUseCase,
   ) {}
 
-  @UsePipes(ValidationPipe)
   @Post()
   async createCart(
     @Body() insertCart: InsertCartDTO,
@@ -77,7 +76,6 @@ export class CartController {
     return this.deleteProductCartUseCase.execute(productId, userId);
   }
 
-  @UsePipes(ValidationPipe)
   @Patch()
   async updateProductInCart(
     @Body() updateCartDTO: UpdateCartDTO,
