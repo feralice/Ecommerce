@@ -1,15 +1,22 @@
-import { FindCartByUserId } from "@/modules/cart/domain/use-cases/find-by-user-id/find-by-user-id.service";
+import { FindCartByUserIdUseCase } from "@/modules/cart/domain/use-cases/find-by-user-id/find-by-user-id.service";
 import { CartRepository } from "@/modules/cart/infrastructure/cart.repository";
+import { Injectable } from "@nestjs/common";
 import { DeleteResult } from "typeorm";
 
-export class ClearCartService {
+const LINE_AFFECTED = 1;
+
+@Injectable()
+export class ClearCartUseCase {
   constructor(
-    private cartRepository: CartRepository,
-    private findCartByUserId: FindCartByUserId,
+    private readonly cartRepository: CartRepository,
+    private readonly findCartByUserIdUseCase: FindCartByUserIdUseCase,
   ) {}
 
   async execute(userId: number): Promise<DeleteResult> {
-    const cart = await this.findCartByUserId.execute(userId);
-    return await this.cartRepository.clearCart(cart);
+    const cart = await this.findCartByUserIdUseCase.execute(userId);
+
+    await this.cartRepository.deactivateCart(cart);
+
+    return { raw: [], affected: LINE_AFFECTED };
   }
 }

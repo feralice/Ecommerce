@@ -1,5 +1,5 @@
 import { CartProductEntity } from "@/modules/cart-product/domain/cart-product.entity";
-import { CartRequestDto } from "@/modules/cart/application/dto/cart.dto";
+import { InsertCartDTO } from "@/modules/cart/application/dto/cart.dto";
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { DeleteResult, EntityManager, Repository } from "typeorm";
 
@@ -28,7 +28,7 @@ export class CartProductRepository extends Repository<CartProductEntity> {
   }
 
   async createProductInCart(
-    insertCartDTO: CartRequestDto,
+    insertCartDTO: InsertCartDTO,
     cartId: number,
   ): Promise<CartProductEntity> {
     return this.save({

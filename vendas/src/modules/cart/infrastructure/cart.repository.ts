@@ -1,6 +1,6 @@
-import { DeleteResult, EntityManager, Repository } from "typeorm";
-import { CartEntity } from "@/modules/cart/domain/cart.entity";
-import { Injectable } from "@nestjs/common";
+import { EntityManager, Repository } from 'typeorm';
+import { Injectable } from '@nestjs/common';
+import { CartEntity } from '@/modules/cart/domain/cart.entity';
 
 @Injectable()
 export class CartRepository extends Repository<CartEntity> {
@@ -8,10 +8,7 @@ export class CartRepository extends Repository<CartEntity> {
     super(CartEntity, manager);
   }
 
-  async verifyCartExists(
-    userId: number,
-    isRelations?: boolean,
-  ): Promise<CartEntity> {
+  async findActiveCartByUserId(userId: number, isRelations = false): Promise<CartEntity | null> {
     const relations = isRelations
       ? {
           cartProduct: {
@@ -19,31 +16,24 @@ export class CartRepository extends Repository<CartEntity> {
           },
         }
       : undefined;
-    return await this.findOne({
-      where: {
-        userId,
-        active: true,
-      },
+
+    return this.findOne({
+      where: { userId, active: true },
       relations,
     });
   }
 
   async createCart(userId: number): Promise<CartEntity> {
-    return await this.save({
+    return this.save({
       userId,
       active: true,
     });
   }
 
-  async clearCart(cart: CartEntity): Promise<DeleteResult> {
-    //apenas desativando para deixar histórico
-    await this.save({
+  async deactivateCart(cart: CartEntity): Promise<CartEntity> {
+    return this.save({
       ...cart,
       active: false,
     });
-    return {
-      raw: {},
-      affected: 1,
-    };
   }
 }

@@ -1,28 +1,23 @@
-import { UpdateProductInCartService } from "@/modules/cart-product/domain/use-cases/insert-product-in-cart/insert-product-in-cart.service";
-import { FindCartByUserId } from "@/modules/cart/domain/use-cases/find-by-user-id/find-by-user-id.service";
-import { CreateCartService } from "@/modules/cart/domain/use-cases/create/create-cart.service";
-import { CartRequestDto } from "@/modules/cart/application/dto/cart.dto";
+import { FindCartByUserIdUseCase } from "@/modules/cart/domain/use-cases/find-by-user-id/find-by-user-id.service";
+import { UpdateCartDTO } from "@/modules/cart/application/dto/update-cart.dto";
 import { CartEntity } from "@/modules/cart/domain/cart.entity";
+import { Injectable } from "@nestjs/common";
+import { UpdateProductInCartService } from "@/modules/cart-product/domain/use-cases/insert-product-in-cart/insert-product-in-cart.service";
 
-export class UpdateProductCartService {
+@Injectable()
+export class UpdateProductInCartUseCase {
   constructor(
-    private readonly findCartByUserId: FindCartByUserId,
-    private readonly createCart: CreateCartService,
-    private readonly insertProductCartService: UpdateProductInCartService,
+    private readonly updateProductInCartService: UpdateProductInCartService,
+    private readonly findCartByUserIdUseCase: FindCartByUserIdUseCase,
   ) {}
 
   async execute(
-    updateCartDto: CartRequestDto,
+    updateCartDTO: UpdateCartDTO,
     userId: number,
   ): Promise<CartEntity> {
-    const cart = await this.findCartByUserId.execute(userId).catch(async () => {
-      return this.createCart.createCart(userId);
-    });
+    const cart = await this.findCartByUserIdUseCase.execute(userId);
 
-    await this.insertProductCartService.insertProductInCart(
-      updateCartDto,
-      cart,
-    );
+    await this.updateProductInCartService.insertProductInCart(updateCartDTO, cart);
 
     return cart;
   }

@@ -13,6 +13,6 @@ import { Module, forwardRef } from "@nestjs/common";
     CartProductRepository,
     DeleteCartProductService,
   ],
-  exports: [UpdateProductInCartService],
+  exports: [UpdateProductInCartService, DeleteCartProductService],
 })
 export class CartProductModule {}

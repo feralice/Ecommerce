@@ -1,13 +1,13 @@
 import { AddressRepository } from "@/modules/address/infrastructure/repository/address.repository";
 import { userEntityMock } from "@/modules/user/domain/service/mocks/user-entity.mock";
 import { mockCity } from "@/modules/city/domain/service/mocks/city-entity.mock";
-import { AddressService } from "@/modules/address/service/address.service";
 import { CityService } from "@/modules/city/domain/service/city.service";
 import { UserService } from "@/modules/user/domain/service/user.service";
 import { AddressEntity } from "../entity/address.entity";
 import { createAddressDto } from "./mocks/address.mock";
 import { Test, TestingModule } from "@nestjs/testing";
 import { NotFoundException } from "@nestjs/common";
+import { AddressService } from "@/modules/address/domain/service/address.service";
 
 describe("AddressService tests", () => {
   let service: AddressService;

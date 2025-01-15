@@ -1,15 +1,20 @@
-import { CartEntity } from "@/modules/cart/domain/cart.entity";
 import { CartRepository } from "@/modules/cart/infrastructure/cart.repository";
-import { NotFoundException } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 
-export class FindCartByUserId {
+@Injectable()
+export class FindCartByUserIdUseCase {
   constructor(private readonly cartRepository: CartRepository) {}
 
-  async execute(userId: number): Promise<CartEntity> {
-    const cart = await this.cartRepository.verifyCartExists(userId);
+  async execute(userId: number, isRelations = false) {
+    const cart = await this.cartRepository.findActiveCartByUserId(
+      userId,
+      isRelations,
+    );
+
     if (!cart) {
-      throw new NotFoundException("Cart not found");
+      throw new NotFoundException("Cart active not found");
     }
+
     return cart;
   }
 }

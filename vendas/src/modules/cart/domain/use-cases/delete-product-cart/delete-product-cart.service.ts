@@ -1,15 +1,18 @@
 import { DeleteCartProductService } from "@/modules/cart-product/domain/use-cases/delete-product-cart/delete-product-cart.service";
-import { FindCartByUserId } from "@/modules/cart/domain/use-cases/find-by-user-id/find-by-user-id.service";
+import { FindCartByUserIdUseCase } from "@/modules/cart/domain/use-cases/find-by-user-id/find-by-user-id.service";
+import { Injectable } from "@nestjs/common";
 import { DeleteResult } from "typeorm";
 
-export class DeleteProductInCartService {
+@Injectable()
+export class DeleteProductCartUseCase {
   constructor(
-    private findCartByUserId: FindCartByUserId,
-    private readonly deleteProductCartService: DeleteCartProductService,
+    private readonly deleteProduct: DeleteCartProductService,
+    private readonly findCartByUserIdUseCase: FindCartByUserIdUseCase,
   ) {}
 
   async execute(productId: number, userId: number): Promise<DeleteResult> {
-    const cart = await this.findCartByUserId.execute(userId);
-    return await this.deleteProductCartService.execute(productId, cart.id);
+    const cart = await this.findCartByUserIdUseCase.execute(userId);
+
+    return this.deleteProduct.execute(productId, cart.id);
   }
 }

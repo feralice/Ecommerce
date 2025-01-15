@@ -19,12 +19,12 @@ export class CartEntity {
   @Column({ name: "active", nullable: false })
   active: boolean;
 
-  @OneToMany(() => CartProductEntity, (cartProduct) => cartProduct.cart)
-  cartProduct?: CartProductEntity[];
-
   @CreateDateColumn({ name: "created_at" })
   createdAt: Date;
 
   @UpdateDateColumn({ name: "updated_at" })
   updatedAt: Date;
+
+  @OneToMany(() => CartProductEntity, (cartProduct) => cartProduct.cart)
+  cartProduct?: CartProductEntity[];
 }
