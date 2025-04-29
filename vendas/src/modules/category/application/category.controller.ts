@@ -1,17 +1,17 @@
 import { CategoryResponseDto } from "@/modules/category/application/dto/category-response.dto";
-import { CreateCategoryDto } from "@/modules/category/application/dto/create-category.dto";
-import { CategoryService } from "@/modules/category/domain/service/category.service";
 import {
   ApiBearerAuth,
   ApiOperation,
   ApiResponse,
   ApiTags,
 } from "@nestjs/swagger";
+import { CreateCategoryDto } from "@/modules/category/application/dto/create-category.dto";
+import { CATEGORY } from "@/modules/category/application/constants/category.constant";
+import { CategoryService } from "@/modules/category/domain/service/category.service";
 import { CategoryEntity } from "@/modules/category/domain/entity/category.entity";
 import { UserType } from "@/modules/user/application/enum/user-type.enum";
-import { Body, Controller, Get, Post } from "@nestjs/common";
+import { Body, Controller, Get, HttpStatus, Post } from "@nestjs/common";
 import { Roles } from "@/decorators/roles.decorator";
-import { CATEGORY } from "@/modules/category/application/constants/category.constant";
 
 @ApiTags(CATEGORY.TAG)
 @ApiBearerAuth()
@@ -26,7 +26,7 @@ export class CategoryController {
     description: CATEGORY.FIND_ALL.DESCRIPTION,
   })
   @ApiResponse({
-    status: 200,
+    status: HttpStatus.OK,
     description: CATEGORY.FIND_ALL.RESPONSE_DESCRIPTION,
     type: [CategoryResponseDto],
   })
@@ -40,7 +40,7 @@ export class CategoryController {
     description: CATEGORY.CREATE.DESCRIPTION,
   })
   @ApiResponse({
-    status: 201,
+    status: HttpStatus.CREATED,
     description: CATEGORY.CREATE.RESPONSE_DESCRIPTION,
     type: CategoryEntity,
   })
