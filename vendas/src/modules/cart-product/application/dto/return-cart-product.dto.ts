@@ -1,7 +1,6 @@
 import { CartProductEntity } from "@/modules/cart-product/domain/cart-product.entity";
-import { ReturnCartDTO } from "@/modules/cart/application/dto/return-cart.dto";
 import { ReturnProduct } from "@/modules/product/application/dto/product-return.dto";
-
+import { ReturnCartDTO } from "@/modules/cart/application/dto/return-cart.dto";
 
 export class ReturnCartProductDTO {
   id: number;

@@ -19,7 +19,7 @@ import { UpdateCartDTO } from "@/modules/cart/application/dto/update-cart.dto";
 import { CART } from "@/modules/cart/application/constants/cart.constant";
 import { UserType } from "@/modules/user/application/enum/user-type.enum";
 import { InsertCartDTO } from "@/modules/cart/application/dto/cart.dto";
-import { ApiOperation, ApiResponse } from "@nestjs/swagger";
+import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { UserId } from "@/decorators/user-id.decorator";
 import { Roles } from "@/decorators/roles.decorator";
 import { DeleteResult } from "typeorm";
@@ -27,6 +27,7 @@ import { Response } from "express";
 
 @Roles(UserType.User, UserType.Admin, UserType.Root)
 @Controller("cart")
+@ApiTags(CART.TAG)
 export class CartController {
   constructor(
     private readonly insertProductInCartUseCase: InsertProductInCartUseCase,
