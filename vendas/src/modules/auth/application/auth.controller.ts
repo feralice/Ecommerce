@@ -1,9 +1,9 @@
-import { ReturnLoginDto } from "@/modules/auth/dto/return-login.dto";
+import { ReturnLoginDto } from "@/modules/auth/application/dto/return-login.dto";
+import { AUTH } from "@/modules/auth/application/constant/auth.constant";
+import { AuthService } from "@/modules/auth/domain/service/auth.service";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { LoginDto } from "@/modules/auth/application/dto/login.dto";
 import { Body, Controller, HttpStatus, Post } from "@nestjs/common";
-import { AuthService } from "@/modules/auth/service/auth.service";
-import { AUTH } from "@/modules/auth/constant/auth.constant";
-import { LoginDto } from "@/modules/auth/dto/login.dto";
 @ApiTags(AUTH.TAG)
 @Controller("auth")
 export class AuthController {

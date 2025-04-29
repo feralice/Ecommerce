@@ -12,7 +12,7 @@ export class FindCartByUserIdUseCase {
     );
 
     if (!cart) {
-      throw new NotFoundException("Cart active not found");
+      throw new NotFoundException("Carrinho não encontrado!");
     }
 
     return cart;

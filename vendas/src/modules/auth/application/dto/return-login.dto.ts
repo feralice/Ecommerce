@@ -1,5 +1,5 @@
 import { UserResponseDto } from "@/modules/user/application/dto/response/user-response.dto";
-import { AUTH } from "@/modules/auth/constant/auth.constant";
+import { AUTH } from "@/modules/auth/application/constant/auth.constant";
 import { ApiProperty } from "@nestjs/swagger";
 
 export class ReturnLoginDto {

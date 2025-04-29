@@ -1,12 +1,12 @@
-import { ROLES_KEY } from "@/decorators/roles.decorator";
-import { LoginPayload } from "@/modules/auth/dto/login-payload.dto";
-import { UserType } from "@/modules/user/application/enum/user-type.enum";
 import {
-    CanActivate,
-    ExecutionContext,
-    ForbiddenException,
-    Injectable,
+  CanActivate,
+  ExecutionContext,
+  ForbiddenException,
+  Injectable,
 } from "@nestjs/common";
+import { LoginPayload } from "@/modules/auth/application/dto/login-payload.dto";
+import { UserType } from "@/modules/user/application/enum/user-type.enum";
+import { ROLES_KEY } from "@/decorators/roles.decorator";
 import { Reflector } from "@nestjs/core";
 import { JwtService } from "@nestjs/jwt";
 

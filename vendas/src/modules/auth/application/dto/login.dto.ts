@@ -1,4 +1,4 @@
-import { AUTH } from "@/modules/auth/constant/auth.constant";
+import { AUTH } from "@/modules/auth/application/constant/auth.constant";
 import { IsNotEmpty, IsString } from "class-validator";
 import { ApiProperty } from "@nestjs/swagger";
 

@@ -2,11 +2,9 @@ import { UpdateProductInCartService } from "@/modules/cart-product/domain/use-ca
 import { CartProductRepository } from "@/modules/cart-product/infrastructure/cart-product.repository";
 import { CartProductEntity } from "@/modules/cart-product/domain/cart-product.entity";
 import { ProductService } from "@/modules/product/domain/service/product.service";
-import { ProductEntity } from "@/modules/product/domain/entity/product.entity";
-import { CartRequestDto } from "@/modules/cart/application/dto/cart.dto";
+import { InsertCartDTO } from "@/modules/cart/application/dto/cart.dto";
 import { CartEntity } from "@/modules/cart/domain/cart.entity";
 import { Test, TestingModule } from "@nestjs/testing";
-import { NotFoundException } from "@nestjs/common";
 
 describe("UpdateProductInCartService", () => {
   let service: UpdateProductInCartService;
@@ -34,114 +32,67 @@ describe("UpdateProductInCartService", () => {
       ],
     }).compile();
 
-    service = module.get<UpdateProductInCartService>(
-      UpdateProductInCartService,
-    );
-    cartProductRepository = module.get<CartProductRepository>(
-      CartProductRepository,
-    );
-    productService = module.get<ProductService>(ProductService);
+    service = module.get(UpdateProductInCartService);
+    cartProductRepository = module.get(CartProductRepository);
+    productService = module.get(ProductService);
   });
 
-  it("should be defined", () => {
-    expect(service).toBeDefined();
+  it("should create a new product in cart if it does not exist", async () => {
+    const insertCartDTO: InsertCartDTO = { productId: 1, amount: 2 };
+    const cart: CartEntity = { id: 10 } as CartEntity;
+    const createdCartProduct = { id: 100 } as CartProductEntity;
+
+    (productService.findProductById as jest.Mock).mockResolvedValue({});
+    (cartProductRepository.verifyProductInCart as jest.Mock).mockRejectedValue(
+      new Error("Not Found"),
+    );
+    (cartProductRepository.createProductInCart as jest.Mock).mockResolvedValue(
+      createdCartProduct,
+    );
+
+    const result = await service.insertProductInCart(insertCartDTO, cart);
+
+    expect(productService.findProductById).toHaveBeenCalledWith(
+      insertCartDTO.productId,
+    );
+    expect(cartProductRepository.verifyProductInCart).toHaveBeenCalledWith(
+      insertCartDTO.productId,
+      cart.id,
+    );
+    expect(cartProductRepository.createProductInCart).toHaveBeenCalledWith(
+      insertCartDTO,
+      cart.id,
+    );
+    expect(result).toEqual(createdCartProduct);
   });
 
-  describe("insertProductInCart", () => {
-    it("should add a new product to the cart when it does not exist", async () => {
-      const cart: CartEntity = { id: 1, userId: 1, active: true } as CartEntity;
-      const insertCartDTO: CartRequestDto = { productId: 101, amount: 2 };
-      const newCartProduct: CartProductEntity = {
-        id: 1,
-        productId: 101,
-        cartId: 1,
-        amount: 2,
-      } as CartProductEntity;
+  it("should update the product amount if the product already exists in the cart", async () => {
+    const insertCartDTO: InsertCartDTO = { productId: 1, amount: 5 };
+    const cart: CartEntity = { id: 10 } as CartEntity;
+    const existingCartProduct = { id: 200 } as CartProductEntity;
+    const updatedCartProduct = { id: 200, amount: 5 } as CartProductEntity;
 
-      jest.spyOn(productService, "findProductById").mockResolvedValue({
-        id: 101,
-        name: "Mock Product",
-        categoryId: 1,
-        price: 100,
-        image: "mock-image.jpg",
-        createdAt: "2023-01-01T00:00:00Z",
-        updatedAt: "2023-01-02T00:00:00Z",
-        category: {
-          id: 1,
-          name: "Mock Category",
-        },
-        cartProduct: [],
-      } as ProductEntity);
+    (productService.findProductById as jest.Mock).mockResolvedValue({});
+    (cartProductRepository.verifyProductInCart as jest.Mock).mockResolvedValue(
+      existingCartProduct,
+    );
+    (cartProductRepository.updateProductAmount as jest.Mock).mockResolvedValue(
+      updatedCartProduct,
+    );
 
-      jest
-        .spyOn(cartProductRepository, "verifyProductInCart")
-        .mockRejectedValue(new NotFoundException());
-      jest
-        .spyOn(cartProductRepository, "createProductInCart")
-        .mockResolvedValue(newCartProduct);
+    const result = await service.insertProductInCart(insertCartDTO, cart);
 
-      const result = await service.insertProductInCart(insertCartDTO, cart);
-
-      expect(productService.findProductById).toHaveBeenCalledWith(101);
-      expect(cartProductRepository.verifyProductInCart).toHaveBeenCalledWith(
-        101,
-        1,
-      );
-      expect(cartProductRepository.createProductInCart).toHaveBeenCalledWith(
-        insertCartDTO,
-        1,
-      );
-      expect(result).toEqual(newCartProduct);
-    });
-
-    it("should update the product amount when it already exists in the cart", async () => {
-      const cart: CartEntity = { id: 1, userId: 1, active: true } as CartEntity;
-      const insertCartDTO: CartRequestDto = { productId: 102, amount: 3 };
-      const existingCartProduct: CartProductEntity = {
-        id: 2,
-        productId: 102,
-        cartId: 1,
-        amount: 5,
-      } as CartProductEntity;
-      const updatedCartProduct: CartProductEntity = {
-        ...existingCartProduct,
-        amount: 8,
-      };
-
-      jest.spyOn(productService, "findProductById").mockResolvedValue({
-        id: 102,
-        name: "Existing Product",
-        categoryId: 2,
-        price: 150,
-        image: "existing-product.jpg",
-        createdAt: "2023-01-01T00:00:00Z",
-        updatedAt: "2023-01-02T00:00:00Z",
-        category: {
-          id: 2,
-          name: "Existing Category",
-        },
-        cartProduct: [],
-      } as ProductEntity);
-
-      jest
-        .spyOn(cartProductRepository, "verifyProductInCart")
-        .mockResolvedValue(existingCartProduct);
-      jest
-        .spyOn(cartProductRepository, "updateProductAmount")
-        .mockResolvedValue(updatedCartProduct);
-
-      const result = await service.insertProductInCart(insertCartDTO, cart);
-
-      expect(productService.findProductById).toHaveBeenCalledWith(102);
-      expect(cartProductRepository.verifyProductInCart).toHaveBeenCalledWith(
-        102,
-        1,
-      );
-      expect(cartProductRepository.updateProductAmount).toHaveBeenCalledWith(
-        existingCartProduct,
-        3,
-      );
-      expect(result).toEqual(updatedCartProduct);
-    });
+    expect(productService.findProductById).toHaveBeenCalledWith(
+      insertCartDTO.productId,
+    );
+    expect(cartProductRepository.verifyProductInCart).toHaveBeenCalledWith(
+      insertCartDTO.productId,
+      cart.id,
+    );
+    expect(cartProductRepository.updateProductAmount).toHaveBeenCalledWith(
+      existingCartProduct,
+      insertCartDTO.amount,
+    );
+    expect(result).toEqual(updatedCartProduct);
   });
 });
