@@ -15,7 +15,6 @@ import { CartProductModule } from "@/modules/cart-product/cart-product.module";
   controllers: [CartController],
   providers: [
     CartRepository,
-    // Use Cases
     CreateCartUseCase,
     FindCartByUserIdUseCase,
     ClearCartUseCase,
@@ -30,6 +29,7 @@ import { CartProductModule } from "@/modules/cart-product/cart-product.module";
     InsertProductInCartUseCase,
     UpdateProductInCartUseCase,
     DeleteProductCartUseCase,
-  ],
+    
+    ],
 })
 export class CartModule {}

@@ -11,6 +11,11 @@ export const mockProductEntity = (): ProductEntity[] => {
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
     category: mockCategoryEntity(),
+    weight: 0,
+    length: 0,
+    height: 0,
+    width: 0,
+    diameter: 0,
   };
 
   const product2: ProductEntity = {
@@ -22,6 +27,11 @@ export const mockProductEntity = (): ProductEntity[] => {
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
     category: mockCategoryEntity(),
+    weight: 0,
+    length: 0,
+    height: 0,
+    width: 0,
+    diameter: 0,
   };
 
   return [product1, product2];
